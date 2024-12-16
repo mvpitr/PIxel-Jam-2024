@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://cncow232qw6v4"]
+
+[ext_resource type="Script" path="res://GodotAssets/Scene/Tilesets/Stage1/urch_1_load.gd" id="1_ll34d"]
+
+[node name="Urch1Load" type="Area2D"]
+script = ExtResource("1_ll34d")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(1714.5, 827)
+debug_color = Color(0.872791, 0.195595, 0.710183, 0.42)

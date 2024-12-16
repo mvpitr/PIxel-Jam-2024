@@ -1,0 +1,20 @@
+[gd_scene load_steps=5 format=3 uid="uid://gyg55l2wvipd"]
+
+[ext_resource type="PackedScene" uid="uid://cdx8dv0kngvnb" path="res://GodotAssets/Screens/screen_UI.tscn" id="1_1e8l4"]
+[ext_resource type="Script" path="res://GodotAssets/Scene/Levels/Camera.gd" id="2_a55g7"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera_host/phantom_camera_host.gd" id="3_gfgd4"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7o2x5"]
+noise_type = 3
+
+[node name="Game" type="Node2D"]
+
+[node name="ScreenUi" parent="." instance=ExtResource("1_1e8l4")]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("2_a55g7")
+max_roll = 0.01
+noise = SubResource("FastNoiseLite_7o2x5")
+
+[node name="PhantomCameraHost" type="Node" parent="Camera2D"]
+script = ExtResource("3_gfgd4")

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://c11i4f2wlfs2j"]
+
+[ext_resource type="Texture2D" uid="uid://bkocxfbxk8egx" path="res://Assets/ScubaCat/tailseg.png" id="1_tu8y7"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gayfb"]
+radius = 2.0
+height = 10.0
+
+[node name="TailSegment" type="RigidBody2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -1.78814e-07)
+texture = ExtResource("1_tu8y7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_gayfb")

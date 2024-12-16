@@ -1,0 +1,93 @@
+[gd_scene load_steps=9 format=3 uid="uid://dlb2raeml2wbt"]
+
+[ext_resource type="Texture2D" uid="uid://54toyyedynrk" path="res://Assets/Tiles/Area1/Breakable/crumblewall.png" id="1_3b87n"]
+
+[sub_resource type="GDScript" id="GDScript_bye4r"]
+resource_name = "BreakBlock"
+script/source = "extends StaticBody2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta):
+	pass
+
+
+func _on_area_2d_area_entered(area):
+	if area.is_in_group(\"shark\"):
+		$AnimatedSprite2D.play(\"break\")
+
+
+func _on_animated_sprite_2d_animation_finished():
+	queue_free()
+"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3pkro"]
+atlas = ExtResource("1_3b87n")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kvo57"]
+atlas = ExtResource("1_3b87n")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y7s2l"]
+atlas = ExtResource("1_3b87n")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w537t"]
+atlas = ExtResource("1_3b87n")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_vcu1k"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3pkro")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_kvo57")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y7s2l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w537t")
+}],
+"loop": false,
+"name": &"break",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dws5m"]
+size = Vector2(49, 20)
+
+[node name="BreakBlock" type="StaticBody2D"]
+collision_layer = 32
+collision_mask = 2
+script = SubResource("GDScript_bye4r")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_vcu1k")
+animation = &"break"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(3, 3)
+shape = SubResource("RectangleShape2D_dws5m")
+disabled = true
+
+[node name="Area2D" type="Area2D" parent="." groups=["break"]]
+collision_layer = 32
+collision_mask = 2
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(43.5, 0)
+scale = Vector2(3, 3)
+shape = SubResource("RectangleShape2D_dws5m")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

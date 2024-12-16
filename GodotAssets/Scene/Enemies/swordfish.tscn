@@ -1,0 +1,93 @@
+[gd_scene load_steps=12 format=3 uid="uid://cps42lmwmvpq1"]
+
+[ext_resource type="PackedScene" uid="uid://bgrj52pqi02gn" path="res://GodotAssets/Scene/Enemies/EnemyBase.tscn" id="1_ntqnh"]
+[ext_resource type="Script" path="res://GodotAssets/Scene/Enemies/swordfish.gd" id="2_6r5fu"]
+[ext_resource type="Texture2D" uid="uid://2o5125d0na2w" path="res://Assets/Enemies/Swordfish/swordfish.png" id="3_r0e87"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgcct"]
+atlas = ExtResource("3_r0e87")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cf2dh"]
+atlas = ExtResource("3_r0e87")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gdmvg"]
+atlas = ExtResource("3_r0e87")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_20k42"]
+atlas = ExtResource("3_r0e87")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ftk4c"]
+atlas = ExtResource("3_r0e87")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8nljs"]
+atlas = ExtResource("3_r0e87")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_27pwv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rgcct")
+}],
+"loop": true,
+"name": &"Charge",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cf2dh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gdmvg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_20k42")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ftk4c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8nljs")
+}],
+"loop": true,
+"name": &"Swim",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mg74w"]
+size = Vector2(95.5, 15)
+
+[node name="Swordfish" instance=ExtResource("1_ntqnh")]
+scale = Vector2(2, 2)
+script = ExtResource("2_6r5fu")
+speed = 200.0
+is_chase_type = true
+
+[node name="Animation" parent="." index="0"]
+position = Vector2(0, -5)
+sprite_frames = SubResource("SpriteFrames_27pwv")
+animation = &"Charge"
+autoplay = "Swim"
+flip_h = true
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(6.25, 2.5)
+shape = SubResource("RectangleShape2D_mg74w")
+
+[node name="DashCD" type="Timer" parent="." index="4"]
+autostart = true
+
+[node name="DashTimer" type="Timer" parent="." index="5"]
+one_shot = true
+
+[node name="Windup" type="Timer" parent="." index="6"]
+one_shot = true
+
+[connection signal="timeout" from="DashCD" to="." method="_on_dash_cd_timeout"]
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="Windup" to="." method="_on_windup_timeout"]

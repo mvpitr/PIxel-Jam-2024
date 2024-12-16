@@ -1,0 +1,119 @@
+[gd_scene load_steps=18 format=3 uid="uid://c1u2smtjlog13"]
+
+[ext_resource type="PackedScene" uid="uid://bgrj52pqi02gn" path="res://GodotAssets/Scene/Enemies/EnemyBase.tscn" id="1_5w48p"]
+[ext_resource type="Script" path="res://GodotAssets/Scene/Enemies/angler_fish.gd" id="2_m7pkh"]
+[ext_resource type="Texture2D" uid="uid://cxn0eog8lyebc" path="res://Assets/Light/light.png" id="3_f6tcr"]
+[ext_resource type="Texture2D" uid="uid://dpnk5gl017xpy" path="res://Assets/Enemies/AnglerFish/angler_fish.png" id="3_mve5n"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6mr7v"]
+atlas = ExtResource("3_mve5n")
+region = Rect2(512, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_45f08"]
+atlas = ExtResource("3_mve5n")
+region = Rect2(640, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uu224"]
+atlas = ExtResource("3_mve5n")
+region = Rect2(768, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q1ume"]
+atlas = ExtResource("3_mve5n")
+region = Rect2(896, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_83fk2"]
+atlas = ExtResource("3_mve5n")
+region = Rect2(1024, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71jdf"]
+atlas = ExtResource("3_mve5n")
+region = Rect2(0, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yvccg"]
+atlas = ExtResource("3_mve5n")
+region = Rect2(128, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0fgmb"]
+atlas = ExtResource("3_mve5n")
+region = Rect2(256, 0, 128, 128)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hk7oi"]
+atlas = ExtResource("3_mve5n")
+region = Rect2(384, 0, 128, 128)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hlos3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6mr7v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_45f08")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uu224")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_q1ume")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_83fk2")
+}],
+"loop": false,
+"name": &"Chomp",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_71jdf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yvccg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0fgmb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hk7oi")
+}],
+"loop": true,
+"name": &"Swim",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1dnui"]
+size = Vector2(71, 42)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j30p6"]
+radius = 207.543
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nn12c"]
+radius = 360.632
+
+[node name="Angler_Fish" instance=ExtResource("1_5w48p")]
+scale = Vector2(3, 3)
+script = ExtResource("2_m7pkh")
+speed = 280.0
+is_chase_type = true
+turn_speed = 0.1
+
+[node name="Animation" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_hlos3")
+animation = &"Chomp"
+autoplay = "Swim"
+flip_h = true
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(0.5, 7)
+shape = SubResource("RectangleShape2D_1dnui")
+
+[node name="attack_radius" parent="AttackArea2D" index="0"]
+shape = SubResource("CircleShape2D_j30p6")
+
+[node name="escape_radius" parent="EscapeArea2D" index="0"]
+shape = SubResource("CircleShape2D_nn12c")
+
+[node name="PointLight2D" type="PointLight2D" parent="." index="5"]
+position = Vector2(-43, -10)
+blend_mode = 2
+texture = ExtResource("3_f6tcr")

@@ -1,0 +1,135 @@
+[gd_scene load_steps=19 format=3 uid="uid://cgl4urfknc2ap"]
+
+[ext_resource type="PackedScene" uid="uid://bgrj52pqi02gn" path="res://GodotAssets/Scene/Enemies/EnemyBase.tscn" id="1_owtag"]
+[ext_resource type="Script" path="res://GodotAssets/Scene/Enemies/Piranha.gd" id="2_k4tca"]
+[ext_resource type="Texture2D" uid="uid://b0n7wd8n4qsds" path="res://Assets/Enemies/Baracuda/baracuda.png" id="3_p6136"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vahj2"]
+atlas = ExtResource("3_p6136")
+region = Rect2(1024, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4m2q4"]
+atlas = ExtResource("3_p6136")
+region = Rect2(1152, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mxkaq"]
+atlas = ExtResource("3_p6136")
+region = Rect2(1280, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6forj"]
+atlas = ExtResource("3_p6136")
+region = Rect2(1408, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_loiur"]
+atlas = ExtResource("3_p6136")
+region = Rect2(0, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bx2gq"]
+atlas = ExtResource("3_p6136")
+region = Rect2(128, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gb6te"]
+atlas = ExtResource("3_p6136")
+region = Rect2(256, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_paiyy"]
+atlas = ExtResource("3_p6136")
+region = Rect2(640, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_76ipd"]
+atlas = ExtResource("3_p6136")
+region = Rect2(512, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fghvu"]
+atlas = ExtResource("3_p6136")
+region = Rect2(384, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5ernl"]
+atlas = ExtResource("3_p6136")
+region = Rect2(768, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_obmif"]
+atlas = ExtResource("3_p6136")
+region = Rect2(896, 0, 128, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xl663"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vahj2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4m2q4")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_mxkaq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6forj")
+}],
+"loop": false,
+"name": &"Chomp",
+"speed": 7.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_loiur")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bx2gq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gb6te")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_paiyy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_76ipd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fghvu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5ernl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_obmif")
+}],
+"loop": true,
+"name": &"Swim",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wdl1f"]
+size = Vector2(124, 36)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1b0ou"]
+size = Vector2(20, 38)
+
+[node name="Piranha" instance=ExtResource("1_owtag")]
+script = ExtResource("2_k4tca")
+speed = 200.0
+is_chase_type = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_xl663")
+animation = &"Swim"
+autoplay = "Swim"
+flip_h = true
+
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_wdl1f")
+
+[node name="Area2D" type="Area2D" parent="." index="6"]
+collision_layer = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2(54, 1)
+shape = SubResource("RectangleShape2D_1b0ou")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

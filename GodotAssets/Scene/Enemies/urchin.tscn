@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://ihj2tt373gpw"]
+
+[ext_resource type="PackedScene" uid="uid://bgrj52pqi02gn" path="res://GodotAssets/Scene/Enemies/EnemyBase.tscn" id="1_jalaf"]
+[ext_resource type="Script" path="res://GodotAssets/Scene/Enemies/urchin.gd" id="2_pc15s"]
+[ext_resource type="Texture2D" uid="uid://djrsk0fiu5v3n" path="res://Assets/Enemies/Urchin/urchin2.png" id="3_i76ti"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3iber"]
+radius = 28.2843
+
+[node name="Urchin" instance=ExtResource("1_jalaf")]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("2_pc15s")
+speed = 10.0
+
+[node name="CollisionShape2D" parent="." index="1"]
+shape = SubResource("CircleShape2D_3iber")
+
+[node name="AttackArea2D" parent="." index="3"]
+visible = false
+collision_layer = 0
+collision_mask = 0
+
+[node name="acceleration_rand_timer" type="Timer" parent="." index="4"]
+
+[node name="EscapeArea2D" parent="." index="5"]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="6"]
+texture = ExtResource("3_i76ti")
+
+[node name="ColorRect" parent="." index="7"]
+visible = false
+color = Color(0, 0, 0, 1)
+
+[connection signal="timeout" from="acceleration_rand_timer" to="." method="_on_acceleration_rand_timer_timeout"]

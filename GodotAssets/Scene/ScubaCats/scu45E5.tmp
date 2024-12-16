@@ -1,0 +1,112 @@
+[gd_scene load_steps=16 format=3 uid="uid://dbx712j354fhq"]
+
+[ext_resource type="Script" path="res://GodotAssets/Scene/ScubaCats/scuba_cat.gd" id="1_jmufv"]
+[ext_resource type="Texture2D" uid="uid://n4w2q22wjsqt" path="res://Assets/ScubaCat/cat_temp.png" id="2_d85l0"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7w4hi"]
+atlas = ExtResource("2_d85l0")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vma6s"]
+atlas = ExtResource("2_d85l0")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xaptb"]
+atlas = ExtResource("2_d85l0")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6b3i1"]
+atlas = ExtResource("2_d85l0")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_llfvj"]
+atlas = ExtResource("2_d85l0")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p7rfq"]
+atlas = ExtResource("2_d85l0")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fwly7"]
+atlas = ExtResource("2_d85l0")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0cqn5"]
+atlas = ExtResource("2_d85l0")
+region = Rect2(448, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_djrp8"]
+atlas = ExtResource("2_d85l0")
+region = Rect2(512, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yl8or"]
+atlas = ExtResource("2_d85l0")
+region = Rect2(576, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_2xqap"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7w4hi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vma6s")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xaptb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6b3i1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_llfvj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p7rfq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fwly7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0cqn5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_djrp8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yl8or")
+}],
+"loop": true,
+"name": &"swim",
+"speed": 15.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b1yjx"]
+size = Vector2(40, 20)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_iq5wg"]
+
+[node name="ScubaCat" type="CharacterBody2D" groups=["scuba_cat"]]
+script = ExtResource("1_jmufv")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_2xqap")
+animation = &"swim"
+autoplay = "swim"
+frame_progress = 0.649234
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(4, 4)
+shape = SubResource("RectangleShape2D_b1yjx")
+
+[node name="DashDuration" type="Timer" parent="."]
+one_shot = true
+
+[node name="SwipeHitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SwipeHitbox"]
+position = Vector2(32, 12)
+shape = SubResource("RectangleShape2D_iq5wg")
+debug_color = Color(0.86447, 0.000594318, 0.864407, 0.42)
+
+[connection signal="timeout" from="DashDuration" to="." method="_on_dash_duration_timeout"]

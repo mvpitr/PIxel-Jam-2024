@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://32e76244npyj"]
+
+[ext_resource type="PackedScene" uid="uid://bgrj52pqi02gn" path="res://GodotAssets/Scene/Enemies/EnemyBase.tscn" id="1_4uwv3"]
+
+[node name="EnemyBase" instance=ExtResource("1_4uwv3")]

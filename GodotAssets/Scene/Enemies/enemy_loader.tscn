@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://ebnb5l6i876a"]
+
+[ext_resource type="Script" path="res://GodotAssets/Scene/Enemies/enemy_loader.gd" id="1_51jss"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_56gqo"]
+radius = 1200.0
+
+[node name="EnemyLoader" type="Area2D"]
+script = ExtResource("1_51jss")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_56gqo")
+debug_color = Color(0.535118, 0.56968, 0, 0.0156863)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

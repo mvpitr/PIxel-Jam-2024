@@ -1,0 +1,93 @@
+[gd_scene load_steps=14 format=3 uid="uid://e8jyk4jmvgb"]
+
+[ext_resource type="Script" path="res://GodotAssets/Screens/end_screen.gd" id="1_1m6jy"]
+[ext_resource type="Texture2D" uid="uid://cgqly7qsthmqe" path="res://Assets/UI/panel.png" id="1_w2i0q"]
+[ext_resource type="FontFile" uid="uid://djd47dkhlg8j2" path="res://Assets/Fonts/Pixerif.ttf" id="2_2vpjd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x2824"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_grbd5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j1xsn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ukhp4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0j1yi"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qvahk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lqd4u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_mqtjt"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_aob5p"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0u7ms"]
+
+[node name="EndScreen" type="CanvasLayer"]
+script = ExtResource("1_1m6jy")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -25.0
+offset_top = -28.0
+offset_right = 1169.0
+offset_bottom = 679.0
+color = Color(0, 0, 0, 1)
+
+[node name="Title" type="RichTextLabel" parent="."]
+offset_left = 442.0
+offset_top = 138.0
+offset_right = 712.0
+offset_bottom = 326.0
+theme_override_fonts/normal_font = ExtResource("2_2vpjd")
+theme_override_fonts/bold_font = ExtResource("2_2vpjd")
+theme_override_fonts/italics_font = ExtResource("2_2vpjd")
+theme_override_fonts/bold_italics_font = ExtResource("2_2vpjd")
+theme_override_fonts/mono_font = ExtResource("2_2vpjd")
+theme_override_font_sizes/normal_font_size = 90
+bbcode_enabled = true
+text = "[center]THE END[/center]"
+fit_content = true
+
+[node name="Start" type="Sprite2D" parent="."]
+position = Vector2(577, 292)
+scale = Vector2(3.46875, 0.5)
+texture = ExtResource("1_w2i0q")
+
+[node name="start_button" type="Button" parent="Start"]
+top_level = true
+offset_left = 466.0
+offset_top = 276.0
+offset_right = 688.0
+offset_bottom = 307.0
+theme_override_fonts/font = ExtResource("2_2vpjd")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxEmpty_x2824")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_grbd5")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_j1xsn")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_ukhp4")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0j1yi")
+text = "BACK TO TITLE"
+
+[node name="Quit" type="Sprite2D" parent="."]
+position = Vector2(577, 327)
+scale = Vector2(3.46875, 0.5)
+texture = ExtResource("1_w2i0q")
+
+[node name="quit_button" type="Button" parent="Quit"]
+top_level = true
+offset_left = 466.0
+offset_top = 311.0
+offset_right = 688.0
+offset_bottom = 342.0
+theme_override_fonts/font = ExtResource("2_2vpjd")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qvahk")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_lqd4u")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_mqtjt")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_aob5p")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_0u7ms")
+text = "QUIT"
+
+[connection signal="pressed" from="Start/start_button" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="Quit/quit_button" to="." method="_on_quit_button_pressed"]

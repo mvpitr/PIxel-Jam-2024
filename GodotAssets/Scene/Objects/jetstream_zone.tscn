@@ -1,0 +1,31 @@
+[gd_scene load_steps=5 format=3 uid="uid://bdqf62g80r4g7"]
+
+[ext_resource type="Script" path="res://GodotAssets/Scene/Objects/jetstream_zone.gd" id="1_vc75a"]
+[ext_resource type="Shader" path="res://Shaders/scroll.gdshader" id="2_mkuwn"]
+[ext_resource type="Texture2D" uid="uid://bwddbtlrbj88d" path="res://Assets/Current/current lines.png" id="3_y8dy0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tquo1"]
+shader = ExtResource("2_mkuwn")
+shader_parameter/motion = Vector2(0, -50)
+shader_parameter/scale = 2.0
+shader_parameter/offset = Vector2(0, 0)
+
+[node name="JetstreamZone" type="Area2D"]
+script = ExtResource("1_vc75a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="."]
+modulate = Color(1, 1, 1, 0.427451)
+material = SubResource("ShaderMaterial_tquo1")
+offset_left = -78.0
+offset_top = -122.0
+offset_right = 101.0
+offset_bottom = 111.0
+texture = ExtResource("3_y8dy0")
+stretch_mode = 1
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

@@ -1,0 +1,24 @@
+[gd_scene load_steps=4 format=3 uid="uid://cbek6hb5ghns2"]
+
+[ext_resource type="Script" path="res://GodotAssets/Scene/Projectiles/EelProjectile.gd" id="1_c0t0a"]
+[ext_resource type="Texture2D" uid="uid://bphgof1xpflnt" path="res://Assets/Projectile/lightning.png" id="2_dcndo"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mtuva"]
+radius = 12.0416
+
+[node name="EelProjectile" type="CharacterBody2D" groups=["projectile"]]
+collision_layer = 256
+collision_mask = 0
+script = ExtResource("1_c0t0a")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_mtuva")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_dcndo")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

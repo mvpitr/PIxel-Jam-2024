@@ -1,0 +1,111 @@
+[gd_scene load_steps=14 format=3 uid="uid://0kurm6oru1xt"]
+
+[ext_resource type="Texture2D" uid="uid://cgqly7qsthmqe" path="res://Assets/UI/panel.png" id="1_8h2aj"]
+[ext_resource type="Script" path="res://GodotAssets/Screens/pause_menu.gd" id="1_x6h7p"]
+[ext_resource type="FontFile" uid="uid://djd47dkhlg8j2" path="res://Assets/Fonts/Pixerif.ttf" id="2_swjf4"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qqdlw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5rv3u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jwtod"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_j80tp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_w4f1y"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_c2be0"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_p5itr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8jby8"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qrrvx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_akafl"]
+
+[node name="Pause Menu" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_x6h7p")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+offset_left = 480.0
+offset_top = 119.0
+offset_right = 675.0
+offset_bottom = 199.0
+theme_override_fonts/normal_font = ExtResource("2_swjf4")
+theme_override_fonts/bold_font = ExtResource("2_swjf4")
+theme_override_fonts/italics_font = ExtResource("2_swjf4")
+theme_override_fonts/bold_italics_font = ExtResource("2_swjf4")
+theme_override_fonts/mono_font = ExtResource("2_swjf4")
+theme_override_font_sizes/normal_font_size = 70
+bbcode_enabled = true
+text = "[center]PAUSED[/center]"
+
+[node name="Resume" type="Sprite2D" parent="."]
+position = Vector2(576, 315.5)
+scale = Vector2(4.34375, 0.484375)
+texture = ExtResource("1_8h2aj")
+
+[node name="ResumeButton" type="Button" parent="Resume"]
+top_level = true
+offset_left = 437.0
+offset_top = 300.0
+offset_right = 715.0
+offset_bottom = 331.0
+theme_override_fonts/font = ExtResource("2_swjf4")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxEmpty_qqdlw")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_5rv3u")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_jwtod")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_j80tp")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_w4f1y")
+text = "Resume
+"
+
+[node name="Quit" type="Sprite2D" parent="."]
+position = Vector2(576, 350)
+scale = Vector2(4.34375, 0.484375)
+texture = ExtResource("1_8h2aj")
+
+[node name="QuitButton" type="Button" parent="Quit"]
+top_level = true
+offset_left = 437.0
+offset_top = 335.0
+offset_right = 715.0
+offset_bottom = 366.0
+theme_override_fonts/font = ExtResource("2_swjf4")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxEmpty_c2be0")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_p5itr")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_8jby8")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_qrrvx")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_akafl")
+text = "Quit
+"
+
+[node name="Volume" type="RichTextLabel" parent="."]
+offset_left = 480.0
+offset_top = 443.0
+offset_right = 868.0
+offset_bottom = 565.0
+scale = Vector2(0.5, 0.5)
+theme_override_fonts/normal_font = ExtResource("2_swjf4")
+theme_override_fonts/bold_font = ExtResource("2_swjf4")
+theme_override_fonts/italics_font = ExtResource("2_swjf4")
+theme_override_fonts/bold_italics_font = ExtResource("2_swjf4")
+theme_override_fonts/mono_font = ExtResource("2_swjf4")
+theme_override_font_sizes/normal_font_size = 80
+bbcode_enabled = true
+text = "[center]Volume:[/center]"
+
+[node name="VolSlider" type="HSlider" parent="."]
+offset_left = 442.0
+offset_top = 477.0
+offset_right = 715.0
+offset_bottom = 493.0
+max_value = 30.0
+value = 30.0
+
+[connection signal="pressed" from="Resume/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="Quit/QuitButton" to="." method="_on_quit_button_pressed"]

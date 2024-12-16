@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://bgrj52pqi02gn"]
+
+[ext_resource type="Script" path="res://GodotAssets/Scene/Enemies/EnemyBase.gd" id="1_ww45h"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_65k6m"]
+light_mode = 2
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_p0rcc"]
+size = Vector2(79, 40)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c1mrr"]
+radius = 507.004
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mkah6"]
+radius = 655.642
+
+[node name="EnemyBase" type="CharacterBody2D" groups=["enemies"]]
+material = SubResource("CanvasItemMaterial_65k6m")
+collision_layer = 2
+collision_mask = 4
+script = ExtResource("1_ww45h")
+
+[node name="Animation" type="AnimatedSprite2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_p0rcc")
+
+[node name="StunTimer" type="Timer" parent="."]
+
+[node name="AttackArea2D" type="Area2D" parent="."]
+collision_layer = 2
+
+[node name="attack_radius" type="CollisionShape2D" parent="AttackArea2D"]
+shape = SubResource("CircleShape2D_c1mrr")
+debug_color = Color(0.298039, 0.627451, 0, 0.0627451)
+
+[node name="EscapeArea2D" type="Area2D" parent="."]
+
+[node name="escape_radius" type="CollisionShape2D" parent="EscapeArea2D"]
+shape = SubResource("CircleShape2D_mkah6")
+debug_color = Color(0, 0.647059, 0.184314, 0.0862745)
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 40.0
+
+[connection signal="timeout" from="StunTimer" to="." method="_on_stun_timer_timeout"]
+[connection signal="body_entered" from="AttackArea2D" to="." method="_on_attack_area_2d_body_entered"]
+[connection signal="body_exited" from="EscapeArea2D" to="." method="_on_escape_area_2d_body_exited"]

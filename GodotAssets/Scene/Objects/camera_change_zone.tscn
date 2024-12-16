@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cb6c7x3dropdo"]
+
+[ext_resource type="Script" path="res://GodotAssets/Scene/Objects/camera_change_zone.gd" id="1_5r15o"]
+
+[node name="CameraChangeZone" type="Area2D"]
+script = ExtResource("1_5r15o")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]

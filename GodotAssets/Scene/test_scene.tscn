@@ -1,0 +1,62 @@
+[gd_scene load_steps=12 format=3 uid="uid://bal76v2ftle30"]
+
+[ext_resource type="PackedScene" uid="uid://dbx712j354fhq" path="res://GodotAssets/Scene/ScubaCats/scuba_cat.tscn" id="1_nc57i"]
+[ext_resource type="PackedScene" uid="uid://ckivosghok5xu" path="res://GodotAssets/Scene/Tilesets/Checkpoint/checkpoint.tscn" id="1_rspec"]
+[ext_resource type="PackedScene" uid="uid://cgl4urfknc2ap" path="res://GodotAssets/Scene/Enemies/piranha.tscn" id="2_blr3u"]
+[ext_resource type="PackedScene" uid="uid://cps42lmwmvpq1" path="res://GodotAssets/Scene/Enemies/swordfish.tscn" id="3_2dxjt"]
+[ext_resource type="PackedScene" uid="uid://ihj2tt373gpw" path="res://GodotAssets/Scene/Enemies/urchin.tscn" id="4_hhb6t"]
+[ext_resource type="PackedScene" uid="uid://c1u2smtjlog13" path="res://GodotAssets/Scene/Enemies/angler_fish.tscn" id="5_j7jro"]
+[ext_resource type="PackedScene" uid="uid://dyr3rukdd63j7" path="res://GodotAssets/Scene/Enemies/eel.tscn" id="6_igttw"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/phantom_camera/phantom_camera_2d.gd" id="7_kd0fo"]
+[ext_resource type="Script" path="res://addons/phantom_camera/scripts/resources/tween_resource.gd" id="8_n50u4"]
+
+[sub_resource type="Curve2D" id="Curve2D_8phak"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 491, 45, 0, 0, 0, 0, 483, 39, 0, 0, 0, 0, 74, -247, 0, 0, 0, 0, -296, -139, 0, 0, 0, 0, -352, 199, 0, 0, 0, 0, 126, 246, 0, 0, 0, 0, 422, 221, 0, 0, 0, 0, 491, 45)
+}
+point_count = 8
+
+[sub_resource type="Resource" id="Resource_xk8ty"]
+script = ExtResource("8_n50u4")
+duration = 1.0
+transition = 0
+ease = 2
+
+[node name="TestScene" type="Node2D"]
+
+[node name="Checkpoint" parent="." instance=ExtResource("1_rspec")]
+position = Vector2(344, -207)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-60.9706, -207.603)
+
+[node name="ScubaCat" parent="." instance=ExtResource("1_nc57i")]
+position = Vector2(-4, 2)
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="Angler_Fish" parent="Enemies" instance=ExtResource("5_j7jro")]
+position = Vector2(-265, -87)
+
+[node name="Piranha" parent="Enemies" instance=ExtResource("2_blr3u")]
+position = Vector2(275, 222)
+
+[node name="Swordfish" parent="Enemies" instance=ExtResource("3_2dxjt")]
+position = Vector2(-257, 166)
+
+[node name="Urchin" parent="Enemies" instance=ExtResource("4_hhb6t")]
+position = Vector2(158, 211)
+
+[node name="Eel" parent="Enemies" instance=ExtResource("6_igttw")]
+position = Vector2(-120, -322)
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = SubResource("Curve2D_8phak")
+
+[node name="PhantomCamera2D" type="Node2D" parent="." node_paths=PackedStringArray("follow_target", "follow_path")]
+position = Vector2(-64.851, -206.471)
+script = ExtResource("7_kd0fo")
+follow_mode = 4
+follow_target = NodePath("../ScubaCat")
+follow_path = NodePath("../Path2D")
+tween_resource = SubResource("Resource_xk8ty")

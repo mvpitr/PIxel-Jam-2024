@@ -1,0 +1,49 @@
+[gd_scene load_steps=3 format=3 uid="uid://cv2uml0e86ls3"]
+
+[ext_resource type="PackedScene" uid="uid://c11i4f2wlfs2j" path="res://Scenes+Scripts/Tail/tail_segment.tscn" id="1_mrnij"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_e6l06"]
+radius = 2.23607
+
+[node name="Tail" type="Node2D"]
+
+[node name="TailPin" type="StaticBody2D" parent="."]
+position = Vector2(0, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TailPin"]
+shape = SubResource("CircleShape2D_e6l06")
+
+[node name="PinJoint2D" type="PinJoint2D" parent="."]
+position = Vector2(0, 10)
+node_a = NodePath("../TailPin")
+node_b = NodePath("../TailSegment")
+bias = 0.9
+
+[node name="TailSegment" parent="." instance=ExtResource("1_mrnij")]
+position = Vector2(0, 15)
+mass = 20.0
+gravity_scale = 0.0
+
+[node name="PinJoint2D2" type="PinJoint2D" parent="."]
+position = Vector2(0, 20)
+node_a = NodePath("../TailSegment")
+node_b = NodePath("../TailSegment2")
+bias = 0.9
+softness = 0.1
+
+[node name="TailSegment2" parent="." instance=ExtResource("1_mrnij")]
+position = Vector2(0, 25)
+mass = 3.0
+gravity_scale = 0.0
+
+[node name="PinJoint2D3" type="PinJoint2D" parent="."]
+position = Vector2(0, 30)
+node_a = NodePath("../TailSegment2")
+node_b = NodePath("../TailSegment3")
+bias = 0.9
+softness = 0.2
+
+[node name="TailSegment3" parent="." instance=ExtResource("1_mrnij")]
+position = Vector2(0, 35)
+mass = 3.0
+gravity_scale = 0.0

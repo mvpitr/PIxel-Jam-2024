@@ -1,0 +1,138 @@
+[gd_scene load_steps=16 format=3 uid="uid://cdx8dv0kngvnb"]
+
+[ext_resource type="Script" path="res://GodotAssets/Screens/screen_UI.gd" id="1_vergm"]
+[ext_resource type="Texture2D" uid="uid://b42s7xdngcrdq" path="res://Assets/UI/title.png" id="2_v2hx7"]
+[ext_resource type="Texture2D" uid="uid://cgqly7qsthmqe" path="res://Assets/UI/panel.png" id="2_ybh5w"]
+[ext_resource type="FontFile" uid="uid://djd47dkhlg8j2" path="res://Assets/Fonts/Pixerif.ttf" id="3_0c8cb"]
+[ext_resource type="AudioStream" uid="uid://qfpd8videudo" path="res://Assets/Audio/title.mp3" id="4_lfyun"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7wav2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_b7i8d"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ao74c"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qku6r"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vp0u5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_k8ts5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_of4rg"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tnnij"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_utbxo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7yylt"]
+
+[node name="ScreenUi" type="CanvasLayer"]
+process_mode = 3
+script = ExtResource("1_vergm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(576, 324)
+texture = ExtResource("2_v2hx7")
+
+[node name="title_screen" type="Node2D" parent="."]
+
+[node name="Title" type="RichTextLabel" parent="title_screen"]
+offset_left = 14.0
+offset_top = 20.0
+offset_right = 284.0
+offset_bottom = 89.0
+theme_override_fonts/normal_font = ExtResource("3_0c8cb")
+theme_override_fonts/bold_font = ExtResource("3_0c8cb")
+theme_override_fonts/italics_font = ExtResource("3_0c8cb")
+theme_override_fonts/bold_italics_font = ExtResource("3_0c8cb")
+theme_override_fonts/mono_font = ExtResource("3_0c8cb")
+theme_override_font_sizes/normal_font_size = 70
+text = "SCUBA CAT"
+fit_content = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Play" type="Sprite2D" parent="title_screen"]
+position = Vector2(984.008, 85.5)
+scale = Vector2(3.46875, 0.765625)
+texture = ExtResource("2_ybh5w")
+
+[node name="play_button" type="Button" parent="title_screen/Play"]
+top_level = true
+anchors_preset = -1
+anchor_left = -0.000868056
+anchor_top = -0.0154321
+anchor_right = -0.000868056
+anchor_bottom = 0.0123457
+offset_left = 874.0
+offset_top = 71.0
+offset_right = 1096.0
+offset_bottom = 102.0
+theme_override_fonts/font = ExtResource("3_0c8cb")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxEmpty_7wav2")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_b7i8d")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ao74c")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_qku6r")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_vp0u5")
+text = "PLAY"
+metadata/_edit_use_anchors_ = true
+
+[node name="Quit" type="Sprite2D" parent="title_screen"]
+position = Vector2(984.008, 172)
+scale = Vector2(3.469, 0.766)
+texture = ExtResource("2_ybh5w")
+
+[node name="quit_button" type="Button" parent="title_screen/Quit"]
+top_level = true
+offset_left = 873.0
+offset_top = 148.0
+offset_right = 1095.0
+offset_bottom = 196.0
+theme_override_fonts/font = ExtResource("3_0c8cb")
+theme_override_font_sizes/font_size = 50
+theme_override_styles/normal = SubResource("StyleBoxEmpty_k8ts5")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_of4rg")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_tnnij")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_utbxo")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_7yylt")
+text = "QUIT"
+
+[node name="level_select_screen" type="Node2D" parent="."]
+visible = false
+
+[node name="VBoxContainer" type="VBoxContainer" parent="level_select_screen"]
+offset_left = 375.0
+offset_top = 274.0
+offset_right = 825.0
+offset_bottom = 375.0
+
+[node name="stage_1_button" type="Button" parent="level_select_screen/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Stage 1"
+
+[node name="stage_2_button" type="Button" parent="level_select_screen/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Stage 2"
+
+[node name="stage_3_button" type="Button" parent="level_select_screen/VBoxContainer"]
+layout_mode = 2
+disabled = true
+text = "Stage 3"
+
+[node name="level_select_back_button" type="Button" parent="level_select_screen"]
+offset_left = 276.0
+offset_top = 378.0
+offset_right = 352.0
+offset_bottom = 416.0
+text = "Back"
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_lfyun")
+autoplay = true
+
+[connection signal="pressed" from="title_screen/Play/play_button" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="title_screen/Quit/quit_button" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="level_select_screen/VBoxContainer/stage_1_button" to="." method="_on_stage_1_button_pressed"]
+[connection signal="pressed" from="level_select_screen/level_select_back_button" to="." method="_on_level_select_back_button_pressed"]

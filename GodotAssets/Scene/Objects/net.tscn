@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://cprxa42tt1yup"]
+
+[ext_resource type="Texture2D" uid="uid://es08lg2tsavi" path="res://Assets/Items/net.png" id="1_ou2qn"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wygls"]
+size = Vector2(32.3258, 63.0381)
+
+[node name="Net" type="Area2D" groups=["net"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(64.9999, 0.000164787)
+rotation = -3.14159
+scale = Vector2(3.77407, -7.77937)
+shape = SubResource("RectangleShape2D_wygls")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-1, 2)
+scale = Vector2(4.26563, 6.125)
+texture = ExtResource("1_ou2qn")

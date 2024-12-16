@@ -1,0 +1,68 @@
+[gd_scene load_steps=10 format=3 uid="uid://5o72s7gp8yag"]
+
+[ext_resource type="Script" path="res://GodotAssets/Scene/Plants/bubble_coral.gd" id="1_jyumu"]
+[ext_resource type="Texture2D" uid="uid://cksiyl3px2r3m" path="res://Assets/Plants/bubblecoral.png" id="2_1fd52"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_acgvj"]
+atlas = ExtResource("2_1fd52")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qrj5b"]
+atlas = ExtResource("2_1fd52")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8c53p"]
+atlas = ExtResource("2_1fd52")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c347w"]
+atlas = ExtResource("2_1fd52")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_glaxj"]
+atlas = ExtResource("2_1fd52")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5c6xb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_acgvj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qrj5b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8c53p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c347w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_glaxj")
+}],
+"loop": false,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_4gvw7"]
+radius = 25.0
+
+[node name="BubbleCoral" type="Area2D"]
+scale = Vector2(3.5, 3.5)
+script = ExtResource("1_jyumu")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1.71429, 1.86264e-09)
+rotation = 1.53764
+sprite_frames = SubResource("SpriteFrames_5c6xb")
+autoplay = "default"
+frame = 4
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -13)
+shape = SubResource("CircleShape2D_4gvw7")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dnylny8kubayp"]
+
+[ext_resource type="Script" path="res://GodotAssets/Scene/Objects/pressure_zone.gd" id="1_t3oa5"]
+
+[node name="PressureZone" type="Area2D"]
+script = ExtResource("1_t3oa5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(136, 60.5)
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

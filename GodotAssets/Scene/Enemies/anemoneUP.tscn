@@ -1,0 +1,46 @@
+[gd_scene load_steps=9 format=3 uid="uid://cca3my4h1mclx"]
+
+[ext_resource type="PackedScene" uid="uid://bgrj52pqi02gn" path="res://GodotAssets/Scene/Enemies/EnemyBase.tscn" id="1_uucjg"]
+[ext_resource type="Script" path="res://GodotAssets/Scene/Enemies/anemone.gd" id="2_27u8d"]
+[ext_resource type="Shader" path="res://Shaders/waterwave.gdshader" id="3_4aeir"]
+[ext_resource type="Texture2D" uid="uid://de6py83fb01wy" path="res://Assets/Enemies/anemone/anemone.png" id="4_crl30"]
+[ext_resource type="AudioStream" uid="uid://d3r86l4vknybl" path="res://Assets/Audio/zap.wav" id="5_qsj2m"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6v0w8"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_wnfuv"]
+noise = SubResource("FastNoiseLite_6v0w8")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2lsid"]
+shader = ExtResource("3_4aeir")
+shader_parameter/pixel_mode = true
+shader_parameter/pixel_amount = 32.0
+shader_parameter/distortion = 0.001
+shader_parameter/texture_noise_system = true
+shader_parameter/noise_speed = 0.1
+shader_parameter/noise_direction = 1
+shader_parameter/worley_noise_system = false
+shader_parameter/worley_cell_density = 10.0
+shader_parameter/worley_speed = 2.0
+shader_parameter/edge_and_mask = false
+shader_parameter/alpha_value = 1.0
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_wnfuv")
+
+[node name="Anemone" instance=ExtResource("1_uucjg")]
+script = ExtResource("2_27u8d")
+speed = 0.0
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(-3, -42)
+
+[node name="ShootTimer" type="Timer" parent="." index="5"]
+
+[node name="Sprite2D" type="Sprite2D" parent="." index="6"]
+material = SubResource("ShaderMaterial_2lsid")
+position = Vector2(0, -32)
+rotation = 3.14159
+scale = Vector2(2, 2)
+texture = ExtResource("4_crl30")
+
+[node name="Zap" type="AudioStreamPlayer" parent="." index="8" groups=["audio"]]
+stream = ExtResource("5_qsj2m")

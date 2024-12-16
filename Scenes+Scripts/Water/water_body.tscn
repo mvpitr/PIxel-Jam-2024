@@ -1,0 +1,31 @@
+[gd_scene load_steps=8 format=3 uid="uid://dw6ygi3wsfo4y"]
+
+[ext_resource type="Script" path="res://Scenes+Scripts/Water/water_body.gd" id="1_2t7uo"]
+[ext_resource type="Shader" path="res://Shaders/waterdistort.gdshader" id="2_cqxca"]
+[ext_resource type="Script" path="res://Scenes+Scripts/Water/smooth_path.gd" id="3_bmceh"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_wubbh"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ala3k"]
+noise = SubResource("FastNoiseLite_wubbh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d08i2"]
+shader = ExtResource("2_cqxca")
+shader_parameter/refraction_stretch = Vector2(1, 1)
+shader_parameter/refraction_strength = 0.001
+shader_parameter/water_tint = Color(0.2, 0.6, 1, 0.215686)
+shader_parameter/speed = 0.121
+shader_parameter/refraction_map = SubResource("NoiseTexture2D_ala3k")
+
+[sub_resource type="Curve2D" id="Curve2D_xn38v"]
+
+[node name="WaterBody" type="Node2D"]
+script = ExtResource("1_2t7uo")
+
+[node name="WaterPoly" type="Polygon2D" parent="."]
+material = SubResource("ShaderMaterial_d08i2")
+
+[node name="WaterBorder" type="Path2D" parent="."]
+curve = SubResource("Curve2D_xn38v")
+script = ExtResource("3_bmceh")
+spline_length = 4

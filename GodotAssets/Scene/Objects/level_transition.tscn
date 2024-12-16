@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dpg1purkoll2u"]
+
+[ext_resource type="Script" path="res://GodotAssets/Scene/Objects/level_transition.gd" id="1_kw8vq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ogqlt"]
+radius = 20.0
+
+[node name="LevelTransition" type="Area2D"]
+position = Vector2(-144, 120)
+script = ExtResource("1_kw8vq")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(64, 64)
+shape = SubResource("CircleShape2D_ogqlt")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
